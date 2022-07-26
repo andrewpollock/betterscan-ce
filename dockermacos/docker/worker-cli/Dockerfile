@@ -65,3 +65,4 @@ RUN pip3 install email_validator
 RUN pip3 install celery==4.4.6
 RUN pip3 install testresources
 RUN pip3 install checkov
+RUN curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
