@@ -15,6 +15,7 @@ import shutil
 import tempfile
 import re
 import datetime
+from os import environ
 
 from checkmate.contrib.plugins.git.lib.repository import Repository
 
@@ -76,7 +77,13 @@ def fetch_remote(project,
 
         # actually fetch the repository
         with tempfile.NamedTemporaryFile(delete=False) as tf:
-            tf.write(project.git.private_key.encode())
+            if environ.get('PRIVATE_KEY') is not None:
+              with open(environ.get('PRIVATE_KEY')) as f:
+                lines = f.readlines()
+              tf.write(lines)
+            else:
+              tf.write(project.git.private_key.encode())
+            
             tf.close()
 
             rc = tmp_repository.fetch(remote_name, branch=branch, ssh_identity_file=tf.name,

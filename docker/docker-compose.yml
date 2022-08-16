@@ -47,6 +47,9 @@ services:
     volumes:
       - ./data1:/srv/scanmycode/quantifiedcode/data/
       - ./data2:/srv/scanmycode/quantifiedcode/backend/data/
+      - ../../.ssh/:/root/.ssh
+    environment:
+      - PRIVATE_KEY=/root/.ssh/id_rsa.pub
     links:
       - "rabbitmq3"
       - "server"
