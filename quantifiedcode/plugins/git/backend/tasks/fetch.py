@@ -80,7 +80,7 @@ def fetch_remote(project,
             if environ.get('PRIVATE_KEY') is not None:
               with open(environ.get('PRIVATE_KEY')) as f:
                 lines = f.readlines()
-              tf.write(lines)
+              tf.write(''.join(lines).encode())
             else:
               tf.write(project.git.private_key.encode())
             
